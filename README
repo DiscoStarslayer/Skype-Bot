@@ -1,0 +1,23 @@
+Skype's group chat feature allows for a persistant chat room through p2p. Me and my friends 
+ran into a problem like this:
+
+A B and C online
+D offline
+
+A B and C have conversation then go offline
+
+D goes online and sees no conversation as A B or C aren't avalible to update the chat for D
+
+I have a headless linux server (old laptop with a broken screen). I decided to use it to add a E to the chat
+that says online constantly so that A to D will have the most up-to-date chat at all times.
+
+Just having it sit there is no fun though, using the Skype API, DBUS and python I am working on extra
+functionality to this E.
+
+WIP
+
+Current goals:
+
+Encapsulate Skype API and DBUS to simplify parsing chat messages and sending responses
+
+implement !fortune which responds with a randomly generated fortune made with the fortune application
