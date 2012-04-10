@@ -19,3 +19,11 @@ Current goals:
 - Encapsulate Skype API and DBUS to simplify parsing chat messages and sending responses
 
 - Implement !fortune which responds with a randomly generated fortune made with the fortune application
+
+Requirements:
+xvfb
+skype
+python2.7.X
+dbus
+
+Tested on: ArchLinux
