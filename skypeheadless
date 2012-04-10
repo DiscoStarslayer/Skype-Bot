@@ -1,0 +1,10 @@
+#!/bin/bash
+#This command simply launches a virtual x server that just loads skype
+#it runs in the backround continuously even after logging off so it is
+#essentialy a "headless" skype. You may want to run skype with a real
+#x server so you can set it up to automaticly log into your skype username.
+#you can launch this script as another user as root
+#using "su USER -c 'skypeheadless'"
+
+#I made this so I can launch it when archlinux finishes booting
+nohup xvfb-run -n 0 -s "-screen 0 800x600x16" /usr/bin/skype &
