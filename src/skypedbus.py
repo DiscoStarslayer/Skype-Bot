@@ -13,7 +13,7 @@ class SkypeInterface:
 	def Connect(self, name):
 		self.skype = self.bus.get_object(self.service, self.cts)
 		print self.Send("NAME " + name)
-		print self.Send("PROTOCOL 8")
+		print self.Send("PROTOCOL 7")
 	
 	def Send(self, text):
 		print self.skype.Invoke(text)
