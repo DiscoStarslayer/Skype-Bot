@@ -1,0 +1,9 @@
+#!/usr/bin/python2.7
+
+import SkypeAPI
+import gobject
+
+"""Start the main notify loop"""
+loop = gobject.MainLoop()
+SkypeAPI.SInvoke().Connect("test")
+loop.run()
