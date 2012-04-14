@@ -31,9 +31,7 @@ class Filter:
 		return split[1][1:].strip()
 	
 	def Parse(self, body):
-		splitBody = body.split(" ")
-		
-		for i in splitBody:
-			self.Parser.Start(i)
+		splitBody = body.split(" ")		
+		self.Parser.Start(splitBody)
 		
 
