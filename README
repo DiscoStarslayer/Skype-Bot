@@ -26,5 +26,6 @@ skype
 python2.7.X
 dbus
 python2-gobject2
+fortune-mod
 
 Tested on: ArchLinux
