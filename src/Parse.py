@@ -1,4 +1,6 @@
 import Filter
+import random
+import Database
 from subprocess import check_output
 
 class Parse:
@@ -6,12 +8,9 @@ class Parse:
 	def __init__(self, bus, chatNumber):
 		self.bus = bus
 		self.chatNumber = chatNumber
-		self.commands = {'!test':"This is a test reply",
-				 '!tase':"I'm afraid I can't do that.",
-				 '!hello':'Hello Dave',
-				 '!create':'',
-				 '!list':'',
-				 '!fortune':''}
+		self.db = Database.Data()
+		self.commands = self.db.ToDict('commands')
+		self.excuses = self.db.ToList('excuses')
 		
 	def Start(self, body):
 		if body[0].lower() == '!create':
@@ -30,6 +29,14 @@ class Parse:
 		elif body[0].lower() == "!fortune":
 			string = check_output('fortune')
 			self.Reply(string)
+		elif body[0].lower() == "!excuse":
+			self.Reply(excuses[random.randint(0, len(self.excuses))])
+		elif body[0].lower() == "!save":
+			self.db.SaveDict(self.commands, 'commands')
+			self.Reply("Saved commands to file")
+		elif body[0].lower() == "!reload":
+			self.commands = self.db.ToDict('commands')
+			self.Reply("Reloaded command file")
 		else:
 			for i in body:
 				if i.lower() in self.commands:
