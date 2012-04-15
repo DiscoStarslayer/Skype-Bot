@@ -21,6 +21,8 @@ class Parse:
 			string.strip()
 			self.commands["!"+body[1].lower()] = string
 			self.Reply("Created !" + body[1])
+			self.db.SaveDict(self.commands, 'commands')
+			self.Reply("Saved commands to file")
 		elif body[0].lower() == "!list":
 			string = ""
 			for i in self.commands:
@@ -30,7 +32,7 @@ class Parse:
 			string = check_output('fortune')
 			self.Reply(string)
 		elif body[0].lower() == "!excuse":
-			self.Reply(excuses[random.randint(0, len(self.excuses))])
+			self.Reply(self.excuses[random.randint(0, len(self.excuses))])
 		elif body[0].lower() == "!save":
 			self.db.SaveDict(self.commands, 'commands')
 			self.Reply("Saved commands to file")
