@@ -37,6 +37,8 @@ class Parse:
 		elif body[0].lower() == "!reload":
 			self.commands = self.db.ToDict('commands')
 			self.Reply("Reloaded command file")
+		elif body[0].lower() == "!delete":
+			del self.commands['!' + body[1].lower()]
 		else:
 			for i in body:
 				if i.lower() in self.commands:
