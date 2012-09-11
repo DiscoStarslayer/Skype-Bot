@@ -11,9 +11,13 @@ class Parse:
 		self.db = Database.Data()
 		self.commands = self.db.ToDict('commands')
 		self.excuses = self.db.ToList('excuses')
+		random.shuffle(self.excuses)
+		self.excNum = 0
 		
 	def Start(self, body):
+		#Important commands can only be run if line is started with the word
 		token = body[0].lower();
+
 		if token == '!create':
 			string = ""
 			length = len(body) - 2
@@ -24,27 +28,36 @@ class Parse:
 			self.Reply("Created !" + body[1])
 			self.db.SaveDict(self.commands, 'commands')
 			self.Reply("Saved commands to file")
+
 		elif token == "!list":
 			string = ""
 			for i in self.commands:
 				string = string + i + " "
 			self.Reply(string.lower())
-		elif token == "!fortune":
-			string = check_output(['fortune', '-n', '100'])
-			self.Reply(string)
-		elif token == "!excuse":
-			self.Reply(self.excuses[random.randint(0, len(self.excuses))])
+			
 		elif token == "!save":
 			self.db.SaveDict(self.commands, 'commands')
 			self.Reply("Saved commands to file")
+
 		elif token == "!reload":
 			self.commands = self.db.ToDict('commands')
 			self.Reply("Reloaded command file")
+
 		elif token == "!delete":
 			del self.commands['!' + body[1].lower()]
+
 		else:
 			for i in body:
-				if i.lower() in self.commands:
+				word = i.lower()
+				if word == "!fortune":
+					string = check_output(['fortune','-n','100'])
+					self.Reply(string)
+
+				elif word == "!excuse":
+					self.excNum = (self.excNum + 1) % len(self.excuses)
+					self.Reply(self.excuses[self.excNum])
+
+				elif word in self.commands:
 					self.Reply(self.commands[i.lower()])
 
 	def Reply(self, message):

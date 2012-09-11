@@ -24,7 +24,8 @@ class Filter:
 			self.Parse(self.Clean(body))
 	
 	def GetMessage(self, msgNum):
-		return self.bus.Invoke("GET CHATMESSAGE " + msgNum + " BODY")
+		line = self.bus.Invoke("GET CHATMESSAGE " + msgNum + " BODY")
+		return line
 		
 	def Clean(self, body):
 		split = body.split("BODY")
