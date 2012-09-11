@@ -28,4 +28,4 @@ dbus
 python2-gobject2
 fortune-mod
 
-Tested on: ArchLinux
+Tested on: Ubuntu Server 12.04 64bit
