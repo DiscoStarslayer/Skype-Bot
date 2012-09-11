@@ -7,7 +7,7 @@ class Data:
 		item = open(fileName)
 		lines = item.readlines()
 		for i in range(len(lines)):
-			lines[i] = lines[i].strip()
+			lines[i] = lines[i].replace("\a", "\n").strip()
 		return lines
 		item.close()
 	
@@ -25,7 +25,8 @@ class Data:
 	def SaveDict(self, writeDict, fileName):
 		db = open(fileName, 'w')
 		for i in writeDict:
-			string = i + ' ' + writeDict[i] + '\n'
+			temp = writeDict[i].replace("\n", "\a")
+			string = i + ' ' + temp + '\n'
 			db.write(string)
 		db.close()
 

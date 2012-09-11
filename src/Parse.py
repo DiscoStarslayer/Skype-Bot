@@ -13,7 +13,8 @@ class Parse:
 		self.excuses = self.db.ToList('excuses')
 		
 	def Start(self, body):
-		if body[0].lower() == '!create':
+		token = body[0].lower();
+		if token == '!create':
 			string = ""
 			length = len(body) - 2
 			for i in range(length):
@@ -23,23 +24,23 @@ class Parse:
 			self.Reply("Created !" + body[1])
 			self.db.SaveDict(self.commands, 'commands')
 			self.Reply("Saved commands to file")
-		elif body[0].lower() == "!list":
+		elif token == "!list":
 			string = ""
 			for i in self.commands:
 				string = string + i + " "
 			self.Reply(string.lower())
-		elif body[0].lower() == "!fortune":
-			string = check_output('fortune')
+		elif token == "!fortune":
+			string = check_output(['fortune', '-n', '100'])
 			self.Reply(string)
-		elif body[0].lower() == "!excuse":
+		elif token == "!excuse":
 			self.Reply(self.excuses[random.randint(0, len(self.excuses))])
-		elif body[0].lower() == "!save":
+		elif token == "!save":
 			self.db.SaveDict(self.commands, 'commands')
 			self.Reply("Saved commands to file")
-		elif body[0].lower() == "!reload":
+		elif token == "!reload":
 			self.commands = self.db.ToDict('commands')
 			self.Reply("Reloaded command file")
-		elif body[0].lower() == "!delete":
+		elif token == "!delete":
 			del self.commands['!' + body[1].lower()]
 		else:
 			for i in body:
