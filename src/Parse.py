@@ -1,6 +1,8 @@
 import Filter
 import random
 import Database
+import Ball
+import Excuses
 from subprocess import check_output
 
 class Parse:
@@ -10,11 +12,9 @@ class Parse:
 		self.chatNumber = chatNumber
 		self.db = Database.Data()
 		self.commands = self.db.ToDict('commands')
-		self.excuses = self.db.ToList('excuses')
-		self.ball = self.db.ToList('8ball')
-		random.shuffle(self.excuses)
-		self.excNum = 0
-		
+		self.ball = Ball.ball()
+		self.excuses = Excuses.excuse()
+	
 	def Start(self, body):
 		#Important commands can only be run if line is started with the word
 		token = body[0].lower();
@@ -55,11 +55,10 @@ class Parse:
 					self.Reply(string)
 
 				elif word == "!excuse":
-					self.excNum = (self.excNum + 1) % len(self.excuses)
-					self.Reply(self.excuses[self.excNum])
+					self.Reply(self.excuses.get())
 
 				elif word == "!8ball":
-					self.Reply(self.ball[random.randint(0, len(self.ball))])
+					self.Reply(self.ball.get())
 
 				elif word in self.commands:
 					self.Reply(self.commands[i.lower()])
