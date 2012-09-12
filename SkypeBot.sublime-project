@@ -10,7 +10,8 @@
 		{
 			"name" : "Launch SkypeBot",
 			"shell" : true,
-			"cmd" : "killall SkypeBot; ./SkypeBot & echo 'SkypeBot Launched'"
+			"working_dir" : "$project_path/src/",
+			"cmd" : "killall -q SkypeBot; ./SkypeBot & echo 'SkypeBot Launched'"
 			}
 	]
 }
