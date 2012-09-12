@@ -11,6 +11,7 @@ class Parse:
 		self.db = Database.Data()
 		self.commands = self.db.ToDict('commands')
 		self.excuses = self.db.ToList('excuses')
+		self.ball = self.db.ToList('8ball')
 		random.shuffle(self.excuses)
 		self.excNum = 0
 		
@@ -56,6 +57,9 @@ class Parse:
 				elif word == "!excuse":
 					self.excNum = (self.excNum + 1) % len(self.excuses)
 					self.Reply(self.excuses[self.excNum])
+
+				elif word == "!8ball":
+					self.Reply(self.ball[random.randint(0, len(self.ball))])
 
 				elif word in self.commands:
 					self.Reply(self.commands[i.lower()])

@@ -5,5 +5,5 @@ import gobject
 
 """Start the main notify loop"""
 loop = gobject.MainLoop()
-SkypeAPI.SInvoke().Connect("test")
+SkypeAPI.SInvoke().Connect("SkypeBot0.1")
 loop.run()
