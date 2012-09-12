@@ -2,7 +2,15 @@
 	"folders":
 	[
 		{
-			"path": "/home/darren/dev/Skype-Bot"
+			"path": "./"
 		}
+	],
+	"build_systems" :
+	[
+		{
+			"name" : "Launch SkypeBot",
+			"shell" : true,
+			"cmd" : "killall SkypeBot; ./SkypeBot & echo 'SkypeBot Launched'"
+			}
 	]
 }
