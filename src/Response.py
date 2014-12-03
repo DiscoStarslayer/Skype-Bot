@@ -1,4 +1,18 @@
 from PhraseDatabases import EightBall, Excuses, Commands
+from collections import defaultdict
+from pymarkovchain import MarkovChain
+
+
+def _db_factory():
+    return defaultdict(_one_dict)
+
+
+def _one():
+    return 1.0
+
+
+def _one_dict():
+    return defaultdict(_one)
 
 
 class ResponseGenerator:
@@ -8,6 +22,10 @@ class ResponseGenerator:
         self.eightball = EightBall()
         self.excuses = Excuses()
         self.commands = Commands()
+        self.chain = MarkovChain("./markovdb")
+        self.chain.db = _db_factory()
+        with open("markovsource", "r") as markov_file:
+            self.chain.generateDatabase(markov_file.readline())
 
     def generate_response(self, chat_name, body):
         # Tokenize body
@@ -56,6 +74,9 @@ class ResponseGenerator:
 
                 elif token == "!8ball":
                     self.reply(chat_name, self.eightball.get())
+
+                elif token == "tase":
+                    self.reply(chat_name, self.chain.generateString())
 
                 elif token[0] == "!":
                     self.reply(chat_name, self.commands.get(token[1:]))
