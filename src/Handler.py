@@ -20,7 +20,9 @@ class NotifyHandler:
             message["status"] == "RECEIVED"
         ):
             body = self.get_chat_message(message["chat_message_id"])
-            chat_name = self.get_chat_message_chat_name(message["chat_message_id"])
+            chat_name = self.get_chat_message_chat_name(
+                message["chat_message_id"]
+            )
             self.set_chat_message_read(message["chat_message_id"])
             self.parse_response(body, chat_name)
 
@@ -68,6 +70,6 @@ class NotifyHandler:
             parsed_dict["chat_message_id"] = tokens[1]
             parsed_dict["status"] = tokens[3]
         else:
-            print("Unknown Message: {}".format(str(tokens)))
+            print("Unknown Message: {0}".format(str(tokens)))
 
         return parsed_dict

@@ -21,12 +21,12 @@ class ResponseGenerator:
             response = body[response_index:]
             self.commands.set(new_command, response)
 
-            self.reply(chat_name, "Command !{} created.".format(new_command))
+            self.reply(chat_name, "Command !{0} created.".format(new_command))
 
         elif command == "!list":
             string = ""
             for command_ in self.commands.list():
-                string += "!{} ".format(command_)
+                string += "!{0} ".format(command_)
 
             self.reply(chat_name, string.lower())
 
@@ -37,12 +37,12 @@ class ResponseGenerator:
             if success:
                 self.reply(
                     chat_name,
-                    "Command !{} deleted.".format(cleaned_command)
+                    "Command !{0} deleted.".format(cleaned_command)
                 )
             else:
                 self.reply(
                     chat_name,
-                    "Command !{} does not exist.".format(cleaned_command)
+                    "Command !{0} does not exist.".format(cleaned_command)
                 )
 
         # Not a system command, continue attempting to parse
