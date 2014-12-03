@@ -1,9 +1,30 @@
-#!/usr/bin/python2.7
-
-import SkypeAPI
+#!/usr/bin/python
+from DBusServices import ServiceInvoke
+from Handler import NotifyHandler
 import gobject
 
-"""Start the main notify loop"""
-loop = gobject.MainLoop()
-SkypeAPI.SInvoke().Connect("SkypeBot0.1")
-loop.run()
+
+def main():
+    """Start the main notify loop"""
+    loop = gobject.MainLoop()
+
+    # dbus interface + path
+    dbus_connection = ServiceInvoke(
+        "com.Skype.API",
+        "/com/Skype",
+        NotifyHandler
+    )
+
+    # SkypeAPI client name
+    dbus_connection.connect("SkypeBot0.2")
+
+    # dbus service for handling notifications from API
+    dbus_connection.create_notify_service(
+        "com.Skype.API.Client",
+        "/com/Skype/Client"
+    )
+
+    loop.run()
+
+if __name__ == "__main__":
+    main()
