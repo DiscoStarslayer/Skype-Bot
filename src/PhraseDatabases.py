@@ -51,7 +51,7 @@ class Commands:
     def set(self, command, response):
         if self.exists(command):
             self.cursor.execute(
-                "UPDATE commands SET response=? WHERE command=? LIMIT 1",
+                "UPDATE commands SET response=? WHERE command=?",
                 (response, command)
             )
         else:
@@ -65,7 +65,7 @@ class Commands:
     def delete(self, command):
         if self.exists(command):
             self.cursor.execute(
-                "DELETE FROM commands WHERE command=? LIMIT 1",
+                "DELETE FROM commands WHERE command=?",
                 (command,)
             )
 
